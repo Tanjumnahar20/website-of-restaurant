@@ -12,6 +12,7 @@ const MenuCard = ({item}) => {
                 <small>{recipe}</small>
             </div>
             <p className="text-yellow-500">${price}</p>
+
         </div>
     );
 };

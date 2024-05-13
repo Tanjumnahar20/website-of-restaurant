@@ -30,7 +30,17 @@ const PopularMenu = () => {
             key={item._id}
             ></MenuCard>)
         }
+
       </div>
+       <div className="flex justify-center">
+       <button className="btn btn-outline border-0 border-b-4  text-black">view full menu</button>
+
+       </div>
+    <div className="flex justify-center">
+    <div className="w-[700px] h-[100px]  mt-8 bg-black">
+   <h3 className="text-white text-4xl text-center pt-8 ">Call us:01789643</h3>
+       </div>
+    </div>
     </section>
     );
 };
