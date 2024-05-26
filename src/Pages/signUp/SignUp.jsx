@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import {  Helmet } from 'react-helmet-async';
@@ -10,10 +11,13 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const {createUser} = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const {createUser,updateProfileUser} = useContext(AuthContext);
 
   const onSubmit = (data) => {
     console.log(data)
@@ -21,9 +25,18 @@ const SignUp = () => {
     createUser(data.email,data.password)
     .then(result=>{
       const loggedUser = result.user;
-      console.log(loggedUser);
+      // console.log(loggedUser);
       alert('logged in')
+      updateProfileUser(data.name, data.photoUrl)
+      .then(()=>{
+        // console.log();
+        alert('user updated succuessfully')
+        reset();
+        navigate('/');
+      })
+      .catch(error=>console.log(error))
     })
+
   }
 
 
@@ -50,6 +63,15 @@ const SignUp = () => {
                 {errors.name && <span className="text-red-500">This field is required</span>}
 
               </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo url</span>
+                </label>
+                <input type="text"  {...register("photoUrl", { required: true })}  placeholder="photoUrl" className="input input-bordered" required />
+                {errors.photo && <span className="text-red-500">This field is required</span>}
+
+              </div>
+             
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>

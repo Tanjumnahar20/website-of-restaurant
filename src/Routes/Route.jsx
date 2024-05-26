@@ -9,6 +9,8 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/signUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import Secret from "../Pages/Secret/Secret";
+import DashBoard from "../Layout/DashBoard";
+import Cart from "../Pages/Dashboard/Cart/Cart";
 
      export const router = createBrowserRouter([
             {
@@ -41,4 +43,14 @@ import Secret from "../Pages/Secret/Secret";
                }
               ]
             },
+            {
+              path:'dashboard',
+              element:<DashBoard></DashBoard>,
+              children: [
+                {
+                  path:'cart',
+                  element:<Cart></Cart>
+                }
+              ]
+            }
           ]);

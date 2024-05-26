@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 
 const OrderTab = ({items}) => {
 
-    const itemsPerPage = 4; // Define the number of items per page
+    const itemsPerPage = 3; // Define the number of items per page
 const totalPages = Math.ceil(items.length / itemsPerPage);
 
     return (
@@ -25,7 +25,8 @@ const totalPages = Math.ceil(items.length / itemsPerPage);
 
 {Array.from({ length: totalPages }, (_, index) => (
     <SwiperSlide  key={index}>
-    <div className="grid md:grid-cols-3 gap-5 mb-8">
+    {/* <div className="grid md:grid-cols-3 gap-5 mb-8"> */}
+    <div className="flex md:1 gap-5 mb-8 justify-center">
         {
             items.slice(index * itemsPerPage, (index + 1) * itemsPerPage).map(item=>   <OrderCard
             key={item._id}
