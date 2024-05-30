@@ -6,6 +6,8 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { AuthContext } from '../../Auth/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {  Helmet } from 'react-helmet-async';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
+import useAuth from '../../CustomHooks/useAuth';
 
 
 const Login = () => {
@@ -35,6 +37,7 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
+                form.reset()
                 // console.log('signin user',user);
                 Swal.fire({
                     title: "login successful",
@@ -66,6 +69,8 @@ const Login = () => {
             alert('captcha verified')
         }
     }
+
+   
 
     return (
        <>
@@ -111,6 +116,8 @@ const Login = () => {
                             <input className="btn btn-primary" type="submit" value="Login" />
                         </div>
                         <p><small>New here? <Link to="/signup">sign up</Link>  </small></p>
+                        <SocialLogin></SocialLogin>
+
                     </form>
                 </div>
                 <div className="text-center  md:w-1/2 lg:text-left">

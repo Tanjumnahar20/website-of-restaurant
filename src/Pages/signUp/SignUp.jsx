@@ -5,6 +5,9 @@ import { useContext } from "react";
 import {  Helmet } from 'react-helmet-async';
 
 import { AuthContext } from "../../Auth/AuthProvider";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 
 const SignUp = () => {
@@ -19,20 +22,45 @@ const SignUp = () => {
 
   const {createUser,updateProfileUser} = useContext(AuthContext);
 
+  const axiosPublic = useAxiosPublic();
   const onSubmit = (data) => {
-    console.log(data)
-    alert('signup')
     createUser(data.email,data.password)
     .then(result=>{
       const loggedUser = result.user;
       // console.log(loggedUser);
-      alert('logged in')
       updateProfileUser(data.name, data.photoUrl)
       .then(()=>{
-        // console.log();
-        alert('user updated succuessfully')
-        reset();
-        navigate('/');
+        const userInfo ={
+          name:data.name,
+          email:data.email
+        }
+        // user info entry in mongodb
+        axiosPublic.post('/users', userInfo)
+        .then(res=>{
+          if(res.data.insertedId){
+            console.log('user added to the db');
+            reset();
+            Swal.fire({
+              title: "login successful",
+              showClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeInUp
+                  animate__faster
+                `
+              },
+              hideClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeOutDown
+                  animate__faster
+                `
+              }
+            });
+            navigate('/');
+          }
+        })
+       
       })
       .catch(error=>console.log(error))
     })
@@ -105,6 +133,7 @@ const SignUp = () => {
                 <button className="btn btn-primary">Sign up</button>
               </div>
               <p><small>Already have an account? <Link to="/login">login</Link>  </small></p>
+              <SocialLogin> </SocialLogin>
 
             </form>
           </div>
