@@ -23,9 +23,9 @@ const Login = () => {
 
     const [captchaVerified, setCaptchaVerified] = useState(false);
 
-    useEffect(() => {
-        loadCaptchaEnginge(6);
-    }, [])
+    // useEffect(() => {
+    //     loadCaptchaEnginge(6);
+    // }, [])
 
     const handleLogin = e => {
         e.preventDefault();
@@ -62,13 +62,13 @@ const Login = () => {
             })
     }
 
-    const handleValidation = () => {
-        const userCaptchaValue = captchaRef.current.value;
-        if (validateCaptcha(userCaptchaValue)) {
-            setCaptchaVerified(true)
-            alert('captcha verified')
-        }
-    }
+    // const handleValidation = () => {
+    //     const userCaptchaValue = captchaRef.current.value;
+    //     if (validateCaptcha(userCaptchaValue)) {
+    //         setCaptchaVerified(true)
+    //         alert('captcha verified')
+    //     }
+    // }
 
    
 
@@ -99,7 +99,7 @@ const Login = () => {
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
-                        <div className="form-control">
+                        {/* <div className="form-control">
                             <input type="text" ref={captchaRef} name="captcha" placeholder="type the text" className="input input-bordered" required />
                             <label className="label">
                                 <LoadCanvasTemplate />
@@ -111,7 +111,7 @@ const Login = () => {
                                 </label>
                             </div>
 
-                        </div>
+                        </div> */}
                         <div className="form-control mt-6">
                             <input className="btn btn-primary" type="submit" value="Login" />
                         </div>

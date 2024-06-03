@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {  Helmet } from 'react-helmet-async';
 
 import { AuthContext } from "../../Auth/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from "react-simple-captcha";
 
 
 const SignUp = () => {
@@ -19,6 +20,13 @@ const SignUp = () => {
   } = useForm();
 
   const navigate = useNavigate();
+  const captchaRef = useRef(null);
+
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+}, [])
 
   const {createUser,updateProfileUser} = useContext(AuthContext);
 
@@ -41,7 +49,7 @@ const SignUp = () => {
             console.log('user added to the db');
             reset();
             Swal.fire({
-              title: "login successful",
+              title: " successfully signed up",
               showClass: {
                 popup: `
                   animate__animated
@@ -66,6 +74,16 @@ const SignUp = () => {
     })
 
   }
+
+  const handleValidation = () => {
+    const userCaptchaValue = captchaRef.current.value;
+    if (validateCaptcha(userCaptchaValue)) {
+        setCaptchaVerified(true)
+        alert('captcha verified')
+    }
+}
+
+
 
 
     return (
@@ -117,18 +135,26 @@ const SignUp = () => {
                     maxLength: 15,
                      }, )}   placeholder="password" className="input input-bordered" required />
 
-                {/* {errors.password && <span className="text-red-500">This field is required</span>} */}
                 {errors.password?.type === "minLength" && (
         <p className="text-red-600" role="alert">8 required</p>
       )}
-                {/* {errors.password?.type === "pattern" && (
-        <p className="text-red-600" role="alert">must have one special case letter</p>
-      )} */}
+             </div> 
+             <br></br>
 
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                </label>
-              </div>
+             <div className="form-control">
+                            <input type="text" ref={captchaRef} name="captcha" placeholder="type the text" className="input input-bordered" required />
+                            <label className="label">
+                                <LoadCanvasTemplate />
+                            </label>
+                            <div className="form-control">
+                                <label className="cursor-pointer label">
+                                    <span className="label-text text-blue-800">Verify</span>
+                                    <input onClick={handleValidation} type="checkbox" onChange={handleValidation} className="checkbox checkbox-success" />
+                                </label>
+                            </div>
+
+                        </div>
+             
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Sign up</button>
               </div>
