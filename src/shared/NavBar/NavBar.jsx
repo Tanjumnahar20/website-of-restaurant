@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
 import { FiShoppingCart } from "react-icons/fi";
 import useCartItem from "../../CustomHooks/useCartItem";
+import useAdmin from "../../CustomHooks/useAdmin";
+import UserHome from "../../Pages/Dashboard/UserHome/UserHome";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(); 
   const [cart] = useCartItem();
   // console.log('navbar',cart.length);
   const handleLogOut = () => {
@@ -18,9 +21,16 @@ const NavBar = () => {
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/menu'>Our menu</Link></li>
     <li><Link to='/order/Salad'>Order</Link></li>
-    <li><Link to='/secret'>Secret</Link></li>
+    {
+    user && isAdmin   &&   <li><Link to='/secret'>Secret</Link></li> 
+
+    }
+    {
+      user && !isAdmin &&     <li><Link to='/secret'><UserHome></UserHome></Link></li>
+
+    }
     <li>
-      <Link to='/dashboard'>
+      <Link to='/dashboard/cart'>
       <FiShoppingCart />
  <div className="badge badge-secondary">+{cart.length}</div>
 </Link>

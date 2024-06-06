@@ -16,12 +16,16 @@ import Additems from "../Pages/Dashboard/Additems/Additems";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
      export const router = createBrowserRouter([
             {
               path: "/",
               element: <Main></Main>,
               children:[
+                // user route
                 {
                     path:'/',
                     element:<Home></Home>
@@ -45,9 +49,14 @@ import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
                {
                 path:'secret',
                 element:<PrivateRoute><Secret></Secret></PrivateRoute>
+               },
+               {
+                path:'/dashboard/userhome',
+                element:<UserHome></UserHome>
                }
               ]
             },
+            // admin route
             {
               path:'dashboard',
               element:<PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
@@ -56,6 +65,11 @@ import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
                   path:'cart',
                   element:<Cart></Cart>
                 },
+                {
+                  path: '/dashboard/payment',
+                  element:<Payment></Payment>
+                },
+                
                 {
                   path:'users',
                   element:<AdminRoute><AllUser></AllUser></AdminRoute>
@@ -73,6 +87,10 @@ import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
                 {
                   path:'addItems',
                   element:<AdminRoute><Additems></Additems></AdminRoute>
+                },
+                {
+                  path:'/dashboard/adminhome',
+                  element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
                 }
               ]
             }

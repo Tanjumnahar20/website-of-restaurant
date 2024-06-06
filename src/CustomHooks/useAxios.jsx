@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
+import { useEffect } from "react";
 
 
 const axiosSecure = axios.create({
@@ -31,7 +32,8 @@ const useAxios = () => {
     axiosSecure.interceptors.response.use(response => {
         return response
     },
-       async (error) => {
+      useEffect(()=>{
+        async (error) => {
             const status = error.response.status;
             // console.log('error in the interceptor', status);
             // for error 
@@ -41,6 +43,7 @@ const useAxios = () => {
             }
             return Promise.reject(error)
         }
+      })
 
     )
     return axiosSecure;

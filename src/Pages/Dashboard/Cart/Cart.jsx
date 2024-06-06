@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAxios from "../../../CustomHooks/useAxios";
 import useCartItem from "../../../CustomHooks/useCartItem";
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cart, refetch] = useCartItem();
@@ -40,8 +41,10 @@ const Cart = () => {
             <div className="mt-6 flex justify-evenly py-8">
             <h2 className="text-3xl">total items:{cart.length}</h2>
             <h2 className="text-3xl">total price:{totalPrice}</h2>
-            <button className="btn btn-orange">pay</button>
-            </div>
+{          cart.length ?  <Link to='/dashboard/payment'><button className="btn btn-orange">pay</button></Link>
+:
+<Link  to='/dashboard/payment'><button disabled className="btn btn-orange">pay</button></Link>
+}            </div>
             <div className="overflow-x-auto px-9">
   <table className="table">
     {/* head */}

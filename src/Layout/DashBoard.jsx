@@ -52,7 +52,7 @@ const DashBoard = () => {
             :
             <>
                  <li>
-                <NavLink to='/dashboard/home'>
+                <NavLink to='/dashboard/userhome'>
                     <FaHome></FaHome>
                     User Home
                     </NavLink>

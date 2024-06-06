@@ -1,16 +1,18 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import { useForm } from "react-hook-form";
 import SectionTtle from "../../../components/SectionTitle/SectionTtle";
 import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import useAxios from "../../../CustomHooks/useAxios";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const image_hosting_api = import.meta.env.VITE_IMAGE_HOSTING_API;
 const imageUrl = `https://api.imgbb.com/1/upload?key=${image_hosting_api}`;
 
 const UpdateItem = () => {
     const { register, handleSubmit, reset } = useForm();
-    const {name, price, image, recipe, category, _id} = useLoaderData();
+    const {name, price,  recipe, category, _id} = useLoaderData();
 
     const axiosPublic= useAxiosPublic();
     const axiosSecure = useAxios();
@@ -39,8 +41,14 @@ const UpdateItem = () => {
             const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
             console.log(menuRes.data);
             if(menuRes.data.modifiedCount>0){
-                // reset();
-                alert('added to the db')
+                reset();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${name} is added to the db`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
             }
         }
     }
