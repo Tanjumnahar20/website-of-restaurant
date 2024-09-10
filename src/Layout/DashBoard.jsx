@@ -1,4 +1,4 @@
-import { FaBook, FaCalendar, FaCartPlus, FaHome, FaListUl, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaBook, FaCalendar, FaCartPlus, FaHome, FaList, FaListUl, FaUsers, FaUtensils } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
 import { LuBookCopy } from "react-icons/lu";
 import { MdMenu, MdOutlinePayment, MdReviews } from "react-icons/md";
@@ -86,6 +86,12 @@ const DashBoard = () => {
                 <LuBookCopy/>
 
                     bookings</NavLink>
+              </li>
+                <li>
+                <NavLink to='/dashboard/paymentHistory'>
+                <FaList/>
+
+                    Payment history</NavLink>
               </li>
             </>
            }

@@ -2,12 +2,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "./useAxios";
 import useAuth from "./useAuth";
-import { useState } from "react";
-import axios from "axios";
+
 
 const useCartItem = () => {
    const axiosSecure = useAxios();
-   const {user, loading} = useAuth();
+   const {user} = useAuth();
   
    const {  data: cart = [] ,refetch, isLoading } = useQuery({
         
@@ -17,7 +16,7 @@ const useCartItem = () => {
         if(isLoading){
             <p>loading</p>
         }
-        const res = await axios.get(`http://localhost:5000/carts?email=${user.email}`);
+        const res = await axiosSecure.get(`https://website-of-restaurant-server.vercel.app/carts?email=${user.email}`);
         // console.log("cart = ", res);
         return res.data
     }

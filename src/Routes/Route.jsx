@@ -19,6 +19,8 @@ import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
 import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory/PaymentHistory";
+import Profile from "../Pages/Profile/Profile";
 
      export const router = createBrowserRouter([
             {
@@ -53,7 +55,11 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
                {
                 path:'/dashboard/userhome',
                 element:<UserHome></UserHome>
-               }
+               },
+               {
+                path:'/profile',
+                element:<Profile></Profile>
+              },
               ]
             },
             // admin route
@@ -69,7 +75,10 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
                   path: '/dashboard/payment',
                   element:<Payment></Payment>
                 },
-                
+                {
+                  path:'/dashboard/paymentHistory',
+                  element:<PaymentHistory></PaymentHistory>
+                },
                 {
                   path:'users',
                   element:<AdminRoute><AllUser></AllUser></AdminRoute>
@@ -81,7 +90,7 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
                 {
                   path:'updateItem/:id',
                   element:<AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-                  loader: ({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
+                  loader: ({params})=>fetch(`https://website-of-restaurant-server.vercel.app/menu/${params.id}`)
 
                 },
                 {

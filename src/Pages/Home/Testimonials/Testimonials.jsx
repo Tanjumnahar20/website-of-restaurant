@@ -14,13 +14,13 @@ const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/review')
+        fetch('https://website-of-restaurant-server.vercel.app/review')
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [])
 
     return (
-        <section className="my-10">
+        <section className="container my-10">
             <SectionTtle
                 subHeading="what our client say"
                 heading="Testimonials"

@@ -14,7 +14,7 @@ import SectionTtle from '../../../components/SectionTitle/SectionTtle';
 const Category = () => {
     return (
         <>
-      <section>
+      <section className='container'>
 
       <SectionTtle
       subHeading={'from 11am to 10pm'}
@@ -30,7 +30,7 @@ const Category = () => {
           clickable: true,
         }}
         modules={[Pagination]}
-        className="mySwiper mb-16"
+        className="mySwiper mb-16 max-w-[80%] mx-auto"
       >
         <SwiperSlide>
             <img src={slide1} alt="" />

@@ -1,0 +1,44 @@
+/* .cover-container {
+    position: relative;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cover-title {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.bgImag{
+    width: 100%;
+} */
+.cover-container {
+    width: 100%;
+    /* height: 100vh; Full screen height */
+  }
+  
+  .hero {
+    width: 100%;
+    /* height: 100%; Make hero section take full height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cover-title {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Adjust the darkness of the overlay */
+  }

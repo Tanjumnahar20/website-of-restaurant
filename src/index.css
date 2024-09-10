@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container {
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.carousel-root .thumbs-wrapper .animated {
+    display: flex;
+    justify-content: center;
+}
+
+.menu li a {
+    color: white !important;
+}
+
+.carousel .carousel-status {
+    display: none;
+}
